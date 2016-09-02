@@ -1,0 +1,11 @@
+* {
+  outline: 1px red dashed;
+}
+
+nav li {
+  display: inline;
+}
+
+.hidden {
+  display: hidden;
+}
