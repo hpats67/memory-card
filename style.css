@@ -9,3 +9,11 @@ nav li {
 .hidden {
   display: hidden;
 }
+td {
+  max-width: 200px;
+  max-height: 200px;
+}
+img {
+  max-width: 190px;
+  max-height: 190px;
+}
