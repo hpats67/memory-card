@@ -41,6 +41,7 @@ var countTotal = 0;
 var picSelector = document.getElementById('game_table');
 var choiceArray = [];
 var choiceIndexArray = [];
+var correctPairs = [];
 picSelector.addEventListener('click', clickHandler);
 
 function clickHandler(event){
@@ -48,21 +49,31 @@ function clickHandler(event){
   var choiceIndex = event.target.getAttribute('index');
   countTotal += 1;
   choiceIndexArray.push(choiceIndex);
+
   if (choiceIndexArray[0] !== choiceIndexArray[1]) {
     choiceArray.push(choice);
-    if(choiceArray.length === 2){
-      console.log(choiceArray);
-      if(choiceArray[0] === choiceArray[1]){
-        choiceArray = [];
-        choiceIndexArray = [];
-        countCorrect += 1;
-        console.log(true);
+    if (correctPairs.indexOf(choiceArray[0]) === -1) {
+      if(choiceArray.length === 2){
         console.log(choiceArray);
-      } else{
-        choiceArray = [];
-        choiceIndexArray = [];
-        console.log(choiceArray);
+        if(choiceArray[0] === choiceArray[1]){
+          correctPairs.push(choiceArray[0]);
+          choiceArray = [];
+          choiceIndexArray = [];
+          countCorrect += 1;
+          if (countCorrect === 2) {
+            alert('You got them all!');
+            window.location = 'about-info.html';
+          }
+          console.log(true);
+          console.log(choiceArray);
+        } else{
+          choiceArray = [];
+          choiceIndexArray = [];
+          console.log(choiceArray);
+        }
       }
+    }else {
+      choiceArray = [];
     }
   }else {
     alert('please click a separate card, start over');
