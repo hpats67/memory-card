@@ -24,7 +24,9 @@ function buildTable(){
     for (var c = 0; c < 2; c++){
       tData = document.createElement('td');
       image = document.createElement('img');
-      image.setAttribute('src', imageArray[iA]);
+      image.setAttribute('faceup', imageArray[iA]);
+      image.setAttribute('facedown', altImage);
+      image.setAttribute('src', altImage);
       image.setAttribute('index', iA);
       iA += 1;
       tData.appendChild(image);
@@ -42,17 +44,23 @@ var picSelector = document.getElementById('game_table');
 var choiceArray = [];
 var choiceIndexArray = [];
 var correctPairs = [];
+var firstChoice = null;
 picSelector.addEventListener('click', clickHandler);
 
 function clickHandler(event){
-  var choice = event.target.getAttribute('src');
   var choiceIndex = event.target.getAttribute('index');
+  var faceUp = event.target.getAttribute('faceup');
+  var faceDown  = event.target.getAttribute('facedown');
   countTotal += 1;
+  event.target.setAttribute('src', faceUp);
   choiceIndexArray.push(choiceIndex);
 
   if (choiceIndexArray[0] !== choiceIndexArray[1]) {
-    choiceArray.push(choice);
+    choiceArray.push(faceUp);
     if (correctPairs.indexOf(choiceArray[0]) === -1) {
+      if (!firstChoice){
+        firstChoice = event.target;
+      }
       if(choiceArray.length === 2){
         console.log(choiceArray);
         if(choiceArray[0] === choiceArray[1]){
@@ -60,6 +68,7 @@ function clickHandler(event){
           choiceArray = [];
           choiceIndexArray = [];
           countCorrect += 1;
+          firstChoice = null;
           if (countCorrect === 2) {
             alert('You got them all!');
             window.location = 'about-info.html';
@@ -67,6 +76,12 @@ function clickHandler(event){
           console.log(true);
           console.log(choiceArray);
         } else{
+          function flipCards() {
+            event.target.setAttribute('src', faceDown);
+            firstChoice.setAttribute('src', faceDown);
+            firstChoice = null;
+          };
+          setTimeout(flipCards, 1000),
           choiceArray = [];
           choiceIndexArray = [];
           console.log(choiceArray);
@@ -76,6 +91,7 @@ function clickHandler(event){
       choiceArray = [];
     }
   }else {
+    setTimeout(flipCards, 0),
     alert('please click a separate card, start over');
     choiceArray = [];
     choiceIndexArray = [];
