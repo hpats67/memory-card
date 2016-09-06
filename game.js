@@ -53,6 +53,8 @@ var correctPairs = [];
 var firstChoice = null;
 // allows for disabling clicking during timeOut function
 var selecting = false;
+// holds the current player object
+var playerObject;
 picSelector.addEventListener('click', clickHandler);
 
 function clickHandler(event){
@@ -107,6 +109,8 @@ function clickHandler(event){
           //script after all correct choices are made
           if (countCorrect === 6) {
             function finished(){
+              playerObject = updatePlayerInfo(countTotal);
+              pullPushHighScoreArray(playerObject);
               alert('You got them all!');
               window.location = 'about-info.html';
             }
