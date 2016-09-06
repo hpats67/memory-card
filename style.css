@@ -2,18 +2,60 @@
   outline: 1px red dashed;
 }
 
+h1 {
+  text-align: center;
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+nav {
+  text-align: center;
+  clear: both;
+}
+
 nav li {
   display: inline;
+  font-size: 20px;
+}
+
+.instructions, .high_score {
+  width: 80%;
+  margin: auto;
+}
+
+form {
+  width: 20%;
+  margin: auto;
 }
 
 .hidden {
   display: hidden;
 }
+
 td {
   max-width: 200px;
   max-height: 200px;
 }
+
 img {
-  max-width: 190px;
-  max-height: 190px;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.scuttling {
+  width: 630px;
+  margin: 0 auto;
+}
+
+.people {
+  float: left;
+  max-width: 200px;
+  margin-right: 15px;
+}
+
+.scuttling div:last-child {
+  margin-right: 0px;
 }
