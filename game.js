@@ -139,3 +139,28 @@ function clickHandler(event){
   console.log(countCorrect + 'correct count');
   console.log(countTotal + 'total count');
 }
+
+function pullPushHighScoreArray(object) {
+  var jsonArray;
+  var updatedArray;
+  var newArray;
+  if (localStorage.getItem('high_score_array')) {
+    jsonArray = JSON.parse(localStorage.getItem('high_score_array'));
+    jsonArray.push(object);
+    updatedArray = JSON.stringify(jsonArray);
+    localStorage.setItem('high_score_array', updatedArray);
+  } else {
+    newArray = JSON.stringify([object]);
+    localStorage.setItem('high_score_array', newArray);
+  };
+};
+
+function updatePlayerInfo(countTotal) {
+  var playerObject;
+  var returnPlayer;
+  playerObject = JSON.parse(localStorage.getItem('current_player'));
+  playerObject.score = countTotal;
+  returnPlayer = JSON.stringify(playerObject);
+  localStorage.setItem('current_player', returnPlayer);
+  return playerObject;
+};
