@@ -90,7 +90,7 @@ function clickHandler(event){
     choiceArray.push(faceUp);
     //comparing if clicked choice is already matched in order to
     //prevent the same correct choices to be clicked again
-    if (correctPairs.indexOf(choiceArray[0]) === -1) {
+    if (correctPairs.indexOf(choiceArray[0]) === -1 && correctPairs.indexOf(choiceArray[1]) === -1) {
       //determining the first clicked choice and enabling it to switch
       //back if the second choice is wrong
       if (!firstChoice){
@@ -132,6 +132,8 @@ function clickHandler(event){
     }else {
       alert('Please make another choice.');
       choiceArray = [];
+      firstChoice.setAttribute('src', faceDown);
+      firstChoice = null;
     }
   //else if same card is picked twice
   }else {
