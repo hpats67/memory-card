@@ -119,7 +119,6 @@ function clickHandler(event){
         } else{
           selecting = true;
           setTimeout(flipCards, 1000);
-          clickHandler.disable = true;
           choiceArray = [];
           choiceIndexArray = [];
           console.log(choiceArray);
