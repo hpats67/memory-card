@@ -10,7 +10,7 @@
 <body>
 <header>
   <h1>SCuTtle your Memory!</h1>
-  <nav>
+  <nav class="navtop">
     <div class="navlist">
       <a class="navlink" href="game.html">Game Page</a>
     </div>
@@ -20,43 +20,45 @@
   </nav>
 </header>
 <main>
-  <div class="instructions">
-    <h2>Instructions</h2>
-    <hr />
-    <p>Hello and welcome to SCuTtle Your Memory! This is just like the matching game you played as a child. Once your submimt your name and email address, you will be redirected to the game page. On the game page you will see a selection of cards, face down. Your challenge is to pick two cards at a time and try to match them. If they don't match, the cards get turned back over, so make sure you remember what they were. Try to match them with as few clicks as possible so you can get on the leaderboard. Good luck and we hope you enjoy our game!</p>
-  </div>
-  <div>
-    <form id="front_form">
-      <fieldset>
-        <legend>Player Info:</legend>
-        <div class="form_inputs">
-          <label class="form_label">Name:<br /></label>
-          <input type="text" name="name" required="required">
-        </div>
-        <div class="form_inputs">
-          <label class="form_label">Email:<br /></label>
-          <input type="text" name="email" required="required">
-        </div>
-        <div class="form_inputs">
-          <label class="form_label"> Select a Level!</label>
-          <select name="level">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-        </div>
-        <div class="submit_button">
-          <button type="submit">Submit</button>
-        </div>
-        <div class="form_inputs">
-          <p id="feedback"></p>
-        </div>
-      </fieldset>
-    </form>
+  <div class="tablebackground">
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <hr />
+      <p>Hello and welcome to SCuTtle Your Memory! This is just like the matching game you played as a child. Once your submimt your name and email address, you will be redirected to the game page. On the game page you will see a selection of cards, face down. Your challenge is to pick two cards at a time and try to match them. If they don't match, the cards get turned back over, so make sure you remember what they were. Try to match them with as few clicks as possible so you can get on the leaderboard. Good luck and we hope you enjoy our game!</p>
+    </div>
+    <div id="form_background">
+      <form id="front_form">
+        <fieldset>
+          <legend>Player Info:</legend>
+          <div class="form_inputs">
+            <label class="form_label">Name:<br /></label>
+            <input type="text" name="name" required="required">
+          </div>
+          <div class="form_inputs">
+            <label class="form_label">Email:<br /></label>
+            <input type="text" name="email" required="required">
+          </div>
+          <div class="form_inputs">
+            <label class="form_label"> Select a Level!</label>
+            <select name="level">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="submit_button">
+            <button type="submit">Submit</button>
+          </div>
+          <div class="form_inputs">
+            <p id="feedback"></p>
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </div>
 </main>
 <footer>
-  <nav>
+  <nav class="navfooter">
     <div class="navlist">
       <a class="navlink" href="game.html">Game Page</a>
     </div>
