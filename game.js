@@ -1,9 +1,9 @@
 'use strict';
-var imageArrayEasy = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg'];
+var imageArrayEasy = ['imgs/animals/bear.png', 'imgs/animals/bear.png', 'imgs/animals/deer.gif', 'imgs/animals/deer.gif', 'imgs/animals/elephant.jpg', 'imgs/animals/elephant.jpg'];
 
-var imageArrayMedium = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg', 'imgs/rocky.jpg', 'imgs/rocky.jpg', 'imgs/starwars.jpg', 'imgs/starwars.jpg', 'imgs/bladerunner.jpg', 'imgs/bladerunner.jpg'];
+var imageArrayMedium = ['imgs/posters/alien.jpg', 'imgs/posters/alien.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/bladerunner.jpg', 'imgs/posters/bladerunner.jpg'];
 
-var imageArrayHard = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg', 'imgs/rocky.jpg', 'imgs/rocky.jpg', 'imgs/starwars.jpg', 'imgs/starwars.jpg', 'imgs/bladerunner.jpg','imgs/bladerunner.jpg','imgs/silenceofthelambs.jpg', 'imgs/silenceofthelambs.jpg', 'imgs/backtothefuture.jpg', 'imgs/backtothefuture.jpg', 'imgs/indianajones.jpg', 'imgs/indianajones.jpg', 'imgs/jaws.jpg', 'imgs/jaws.jpg', 'imgs/jurassicpark.jpg', 'imgs/jurassicpark.jpg', 'imgs/cat.jpg', 'imgs/cat.jpg'];
+var imageArrayHard = ['imgs/posters/alien.jpg', 'imgs/posters/alien.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/bladerunner.jpg','imgs/posters/bladerunner.jpg','imgs/posters/silenceofthelambs.jpg', 'imgs/posters/silenceofthelambs.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/avengers.jpg', 'imgs/posters/avengers.jpg'];
 
 // function to parse from local storage and grab level
 function getLevel(){
