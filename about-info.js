@@ -39,20 +39,11 @@ for (var l = 0; l < sortedHighScores.length; l++){
   }
 }
 buildHighScore(sortedHighScoresEasy);
-buildHighScore(sortedHighScoresMed);
-buildHighScore(sortedHighScoresHard);
+buildHighScore1(sortedHighScoresMed);
+buildHighScore2(sortedHighScoresHard);
 
 function buildHighScore(array) {
-  var scoreList = document.getElementById('high_score_med');
-  // if(array = sortedHighScoresEasy){
-  //   scoreList = document.getElementById('high_score_easy');
-  // }
-  // else if (array = sortedHighScoresMed) {
-  //   scoreList = document.getElementById('high_score_med');
-  // }
-  // else {
-  //   scoreList = document.getElementById('high_score_hard');
-  // }
+  var scoreList = document.getElementById('high_score_easy');
   var li;
   var loopVariable = array.length < 5 ? array.length : 5;
   for (var i = 0; i < loopVariable; i++) {
@@ -61,5 +52,24 @@ function buildHighScore(array) {
     scoreList.appendChild(li);
   };
 };
-
+function buildHighScore1(array) {
+  var scoreList = document.getElementById('high_score_med');
+  var li;
+  var loopVariable = array.length < 5 ? array.length : 5;
+  for (var i = 0; i < loopVariable; i++) {
+    li = document.createElement('li');
+    li.textContent = array[i].name + ' ' + array[i].score;
+    scoreList.appendChild(li);
+  };
+};
+function buildHighScore2(array) {
+  var scoreList = document.getElementById('high_score_hard');
+  var li;
+  var loopVariable = array.length < 5 ? array.length : 5;
+  for (var i = 0; i < loopVariable; i++) {
+    li = document.createElement('li');
+    li.textContent = array[i].name + ' ' + array[i].score;
+    scoreList.appendChild(li);
+  };
+};
 //main
