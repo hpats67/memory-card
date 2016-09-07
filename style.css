@@ -3,8 +3,22 @@
   src: url('fonts/EraserRegular.ttf');
 }
 
+@font-face {
+  font-family: 'PPETRIAL';
+  src: url('fonts/PPETRIAL.ttf');
+}
+
 * {
   outline: 1px red dashed;
+}
+
+body {
+  background-color: rgb(245, 245, 220);
+  background-image: -moz-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(245, 245, 220)), to(rgb(211, 211, 211)));
+  background-image: -webkit-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
+  background-image: -o-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
+  background-repeat: no-repeat;
 }
 
 h1 {
@@ -14,14 +28,13 @@ h1 {
   color: white;
 }
 
-h2 {
-  font-size: 24px;
+h2, legend {
+  font-size: 28px;
+  font-family: 'PPETRIAL';
+  font-weight: bold;
 }
 
-#headerborder {
-}
-
-header {
+header, footer {
   margin: 10px auto;
   border: 30px solid transparent;
   padding: 40px 20px;
@@ -33,11 +46,24 @@ header {
   border-image: url('imgs/frame.png') 30 30 stretch;
 }
 
-nav {
+footer {
+  height: 40px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+nav.navtop {
   margin-top: 40px;
   text-align: center;
   clear: both;
   height: 40px;
+}
+
+nav.navfooter {
+  text-align: center;
+  height: 40px;
+  position: relative;
+  top: -10px;
 }
 
 .navlist {
@@ -65,10 +91,18 @@ a:visited {
   color: rgb(30, 30, 30);
 }
 
-.instructions, .high_score {
-  width: 660px;
-  padding: 20px 60px;
+.tablebackground {
+  width: 760px;
   margin: 10px auto;
+  background-image: url('imgs/table.png');
+  background-size: 100% 100%;
+  padding: 20px;
+}
+
+.instructions, .high_score {
+  width: 560px;
+  padding: 20px 80px;
+  margin: 40px auto;
   background-image: url('imgs/paper.gif');
   background-repeat: no-repeat;
   background-position: center;
@@ -77,30 +111,70 @@ a:visited {
 
 hr {
   height: 0;
-  width: 90%;
   border: 1px solid black;
+}
+
+p {
+  font-family: 'PPETRIAL';
+  font-size: 20px;
+}
+
+#form_background {
+  width: 380px;
+  height: 340px;
+  padding: 10px;
+  margin: 20px auto;
+  background-image: url('imgs/postitnote.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 form {
   width: 282px;
-  margin: auto;
+  margin: 50px auto;
+}
+
+legend {
+  text-align: center;
 }
 
 fieldset {
   width: 220px;
   padding: 15px;
   margin: 15px;
-  outline: 1px solid gray;
+}
+
+label {
+  font-family: 'PPETRIAL';
+  font-size: 20px;
+  font-weight: bold;
 }
 
 input {
   display: block;
   width: 220px;
+  margin-top: 0;
+  margin-bottom: 6px;
 }
 
 .submit_button {
   text-align: center;
   margin-top: 10px;
+}
+
+button {
+  background-color: rgb(250, 128, 114);
+  border: 1px solid black;
+  padding: 2px;
+  font-family: 'PPETRIAL';
+  font-weight: bold;
+  font-size: 24px;
+}
+
+button:hover {
+  box-shadow: 1px 1px #000, 2px 2px #000, 3px 3px #000;
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
 }
 
 .hidden {
@@ -119,6 +193,7 @@ img {
 
 .scuttling {
   width: 630px;
+  height: 1000px;
   margin: 0 auto;
 }
 
