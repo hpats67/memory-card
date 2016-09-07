@@ -1,7 +1,26 @@
 'use strict';
 
 var imageArray = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg', 'imgs/rocky.jpg', 'imgs/rocky.jpg', 'imgs/starwars.jpg', 'imgs/starwars.jpg', 'imgs/bladerunner.jpg', 'imgs/bladerunner.jpg'];
+
 var altImage = 'imgs/back.png';
+// counts correct pairs
+var countCorrect = 0;
+// counts total clicks
+var countTotal = 0;
+// selects game table
+var picSelector = document.getElementById('game_table');
+// creates array which clicked choices will be stored
+var choiceArray = [];
+// creates array to prevent the same image from being chosen
+var choiceIndexArray = [];
+// creates array to house correctly answered pairs
+var correctPairs = [];
+// allows for flipping of cards
+var firstChoice = null;
+// allows for disabling clicking during timeOut function
+var selecting = false;
+// holds the current player object
+var playerObject;
 
 function shuffleArray(array){
   for (var i = imageArray.length - 1; i > 0; i--){
@@ -37,24 +56,7 @@ function buildTable(){
 }
 shuffleArray(imageArray);
 buildTable();
-// counts correct pairs
-var countCorrect = 0;
-// counts total clicks
-var countTotal = 0;
-// selects game table
-var picSelector = document.getElementById('game_table');
-// creates array which clicked choices will be stored
-var choiceArray = [];
-// creates array to prevent the same image from being chosen
-var choiceIndexArray = [];
-// creates array to house correctly answered pairs
-var correctPairs = [];
-// allows for flipping of cards
-var firstChoice = null;
-// allows for disabling clicking during timeOut function
-var selecting = false;
-// holds the current player object
-var playerObject;
+
 picSelector.addEventListener('click', clickHandler);
 
 function clickHandler(event){
@@ -74,14 +76,6 @@ function clickHandler(event){
   //beginning flip of clicked photo
   event.target.setAttribute('src', faceUp);
   choiceIndexArray.push(choiceIndex);
-  //function to flip cards and allow for setTimout
-  function flipCards() {
-    selecting = false;
-    event.target.setAttribute('src', faceDown);
-    firstChoice.setAttribute('src', faceDown);
-    firstChoice = null;
-    event.target.disable = false;
-  };
   //function to stop selecting already correct Pairs
   console.log('click' + event.target);
   //if statements made to determine what will happen upon clicking of photo
@@ -101,19 +95,9 @@ function clickHandler(event){
         console.log('choice.length' + choiceArray);
         //script if choices are MATCHING
         if(choiceArray[0] === choiceArray[1]){
-          correctPairs.push(choiceArray[0]);
-          choiceArray = [];
-          choiceIndexArray = [];
-          countCorrect += 1;
-          firstChoice = null;
+          pushCctPairs();
           //script after all correct choices are made
           if (countCorrect === 6) {
-            function finished(){
-              playerObject = updatePlayerInfo(countTotal);
-              pullPushHighScoreArray(playerObject);
-              alert('You got them all!');
-              window.location = 'about-info.html';
-            }
             //timeout to allow seeing the final choice
             setTimeout(finished, 500);
           }
@@ -121,11 +105,7 @@ function clickHandler(event){
           console.log(choiceArray);
           //what will happen if choices are NOT MATCHING
         } else{
-          selecting = true;
-          setTimeout(flipCards, 1000);
-          choiceArray = [];
-          choiceIndexArray = [];
-          console.log(choiceArray);
+          choiceNotMatching(event, faceDown);
         }
       }
     //else if choice has already been matched
@@ -137,13 +117,45 @@ function clickHandler(event){
     }
   //else if same card is picked twice
   }else {
-    setTimeout(flipCards, 0),
+    setTimeout(function(){flipCards(event, faceDown);}, 0),
     alert('please click a separate card, start over');
     choiceArray = [];
     choiceIndexArray = [];
   }
   console.log(countCorrect + 'correct count');
   console.log(countTotal + 'total count');
+}
+
+//function to flip cards and allow for setTimout
+function flipCards(event, faceDown) {
+  selecting = false;
+  event.target.setAttribute('src', faceDown);
+  firstChoice.setAttribute('src', faceDown);
+  firstChoice = null;
+  event.target.disable = false;
+};
+
+function pushCctPairs() {
+  correctPairs.push(choiceArray[0]);
+  choiceArray = [];
+  choiceIndexArray = [];
+  countCorrect += 1;
+  firstChoice = null;
+};
+
+function finished(){
+  playerObject = updatePlayerInfo(countTotal);
+  pullPushHighScoreArray(playerObject);
+  alert('You got them all!');
+  window.location = 'about-info.html';
+};
+
+function choiceNotMatching(event, faceDown) {
+  selecting = true;
+  setTimeout(function(){flipCards(event, faceDown);}, 1000);
+  choiceArray = [];
+  choiceIndexArray = [];
+  console.log(choiceArray);
 }
 
 function pullPushHighScoreArray(object) {
