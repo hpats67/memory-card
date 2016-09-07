@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Suez+One" rel="stylesheet">
   <link rel="stylesheet" href="reset.css" type="text/css">
   <link rel="stylesheet" href="style.css" type="text/css">
   <title></title>
@@ -10,21 +11,24 @@
 <header>
   <h1>SCuTtle your Memory!</h1>
   <nav>
-    <ul>
-      <li><a href="game.html">Game Page</a></li>
-      <li><a href="about-info.html">High-Scores</a></li>
-    </ul>
+    <div class="navlist">
+      <a class="navlink" href="game.html">Game Page</a>
+    </div>
+    <div class="navlist">
+      <a class="navlink" href="about-info.html">High-Scores</a>
+    </div>
   </nav>
 </header>
 <main>
   <div class="instructions">
     <h2>Instructions</h2>
+    <hr />
     <p>Hello and welcome to SCuTtle Your Memory! This is just like the matching game you played as a child. Once your submimt your name and email address, you will be redirected to the game page. On the game page you will see a selection of cards, face down. Your challenge is to pick two cards at a time and try to match them. If they don't match, the cards get turned back over, so make sure you remember what they were. Try to match them with as few clicks as possible so you can get on the leaderboard. Good luck and we hope you enjoy our game!</p>
   </div>
   <div>
     <form id="front_form">
       <fieldset>
-        <legend>Player Info</legend>
+        <legend>Player Info:</legend>
         <div class="form_inputs">
           <label class="form_label">Name:<br /></label>
           <input type="text" name="name" required="required">
@@ -45,10 +49,12 @@
 </main>
 <footer>
   <nav>
-    <ul>
-      <li><a href="game.html">Game Page</a></li>
-      <li><a href="about-info.html">High-Scores</a></li>
-    </ul>
+    <div class="navlist">
+      <a class="navlink" href="game.html">Game Page</a>
+    </div>
+    <div class="navlist">
+      <a class="navlink" href="about-info.html">High-Scores</a>
+    </div>
   </nav>
 </footer>
 <script src="app.js" type="text/javascript"></script>
