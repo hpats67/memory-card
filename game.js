@@ -1,7 +1,32 @@
 'use strict';
+var imageArrayEasy = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg'];
 
-var imageArray = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg', 'imgs/rocky.jpg', 'imgs/rocky.jpg', 'imgs/starwars.jpg', 'imgs/starwars.jpg', 'imgs/bladerunner.jpg', 'imgs/bladerunner.jpg'];
+var imageArrayMedium = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg', 'imgs/rocky.jpg', 'imgs/rocky.jpg', 'imgs/starwars.jpg', 'imgs/starwars.jpg', 'imgs/bladerunner.jpg', 'imgs/bladerunner.jpg'];
 
+var imageArrayHard = ['imgs/alien.jpg', 'imgs/alien.jpg', 'imgs/ghostbuster.jpg', 'imgs/ghostbuster.jpg', 'imgs/darkknight.jpg', 'imgs/darkknight.jpg', 'imgs/rocky.jpg', 'imgs/rocky.jpg', 'imgs/starwars.jpg', 'imgs/starwars.jpg', 'imgs/bladerunner.jpg','imgs/bladerunner.jpg','imgs/silenceofthelambs.jpg', 'imgs/silenceofthelambs.jpg', 'imgs/backtothefuture.jpg', 'imgs/backtothefuture.jpg', 'imgs/indianajones.jpg', 'imgs/indianajones.jpg', 'imgs/jaws.jpg', 'imgs/jaws.jpg', 'imgs/jurassicpark.jpg', 'imgs/jurassicpark.jpg', 'imgs/cat.jpg', 'imgs/cat.jpg'];
+
+// function to parse from local storage and grab level
+function getLevel(){
+  level = JSON.parse(localStorage.getItem('current_player'));
+  level1 = level.level;
+}
+getLevel();
+console.log(level);
+console.log(level1);
+function getArray(){
+  if (level1 === 'easy'){
+    imageArray = imageArrayEasy;
+  } else if (level1 === 'medium') {
+    imageArray = imageArrayMedium;
+  }else{
+    imageArray = imageArrayHard;
+  };
+}
+getArray();
+// Variables to capture game level
+var level;
+var level1;
+var imageArray;
 var altImage = 'imgs/back.png';
 // counts correct pairs
 var countCorrect = 0;
@@ -38,7 +63,7 @@ function buildTable(){
   var tRow;
   var tData;
   var image;
-  for (var r = 0; r < 2; r++){
+  for (var r = 0; r < (imageArray.length / 6); r++){
     tRow = document.createElement('tr');
     for (var c = 0; c < 6; c++){
       tData = document.createElement('td');
@@ -97,7 +122,7 @@ function clickHandler(event){
         if(choiceArray[0] === choiceArray[1]){
           pushCctPairs();
           //script after all correct choices are made
-          if (countCorrect === 6) {
+          if (countCorrect === (imageArray.length / 2)) {
             //timeout to allow seeing the final choice
             setTimeout(finished, 500);
           }
