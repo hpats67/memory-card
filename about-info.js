@@ -26,44 +26,19 @@ sortedHighScores = objectSort(highScores);
 for (var j = 0; j < sortedHighScores.length; j++){
   if (sortedHighScores[j].level === 'easy'){
     sortedHighScoresEasy.push(sortedHighScores[j]);
+  }else if (sortedHighScores[j].level === 'medium') {
+    sortedHighScoresMed.push(sortedHighScores[j]);
+  }else{
+    sortedHighScoresHard.push(sortedHighScores[j]);
   }
 }
-for (var k = 0; k < sortedHighScores.length; k++){
-  if (sortedHighScores[k].level === 'medium'){
-    sortedHighScoresMed.push(sortedHighScores[k]);
-  }
-}
-for (var l = 0; l < sortedHighScores.length; l++){
-  if (sortedHighScores[l].level === 'medium'){
-    sortedHighScoresHard.push(sortedHighScores[l]);
-  }
-}
-buildHighScore(sortedHighScoresEasy);
-buildHighScore1(sortedHighScoresMed);
-buildHighScore2(sortedHighScoresHard);
 
-function buildHighScore(array) {
-  var scoreList = document.getElementById('high_score_easy');
-  var li;
-  var loopVariable = array.length < 5 ? array.length : 5;
-  for (var i = 0; i < loopVariable; i++) {
-    li = document.createElement('li');
-    li.textContent = array[i].name + ' ' + array[i].score;
-    scoreList.appendChild(li);
-  };
-};
-function buildHighScore1(array) {
-  var scoreList = document.getElementById('high_score_med');
-  var li;
-  var loopVariable = array.length < 5 ? array.length : 5;
-  for (var i = 0; i < loopVariable; i++) {
-    li = document.createElement('li');
-    li.textContent = array[i].name + ' ' + array[i].score;
-    scoreList.appendChild(li);
-  };
-};
-function buildHighScore2(array) {
-  var scoreList = document.getElementById('high_score_hard');
+buildHighScore(sortedHighScoresEasy, 'high_score_easy');
+buildHighScore(sortedHighScoresMed, 'high_score_med');
+buildHighScore(sortedHighScoresHard, 'high_score_hard');
+
+function buildHighScore(array, string) {
+  var scoreList = document.getElementById(string);
   var li;
   var loopVariable = array.length < 5 ? array.length : 5;
   for (var i = 0; i < loopVariable; i++) {

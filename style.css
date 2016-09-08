@@ -8,9 +8,18 @@
   src: url('fonts/PPETRIAL.ttf');
 }
 
+@font-face {
+  font-family: 'DJB_Chalk_It_Up';
+  src: url('fonts/DJB_Chalk_It_Up.ttf');
+}
+
 /** {
   outline: 1px red dashed;
 }*/
+
+html {
+  min-height: 100%;
+}
 
 body {
   background-color: rgb(245, 245, 220);
@@ -24,7 +33,7 @@ body {
 h1 {
   text-align: center;
   font-size: 69px;
-  font-family: 'EraserRegular';
+  font-family: 'DJB_Chalk_It_Up';
   color: white;
 }
 
@@ -37,7 +46,7 @@ h2, legend {
 h3 {
   text-align: center;
   font-size: 45px;
-  font-family: 'EraserRegular';
+  font-family: 'DJB_Chalk_It_Up';
   color: white;
 }
 
@@ -45,8 +54,8 @@ header, footer {
   margin: 10px auto;
   border: 40px solid transparent;
   padding: 40px 20px;
-  width: 630px;
-  height: 130px;
+  width: 800px;
+  height: 61px;
   background-image: url('imgs/chalkboard.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
@@ -67,7 +76,6 @@ footer {
   padding: 0 20px;
   margin: 0 auto;
 }
-
 
 nav.navfooter {
   text-align: center;
@@ -103,9 +111,19 @@ a:visited {
 }
 
 .tablebackground {
-  width: 760px;
+  width: 880px;
+  margin: 20px auto;
+  background-image: url('imgs/tablecrop.png');
+  background-size: 100% 100%;
+  padding: 20px;
+}
+
+.tablebackground_game {
+  width: 1000px;
+  min-height: 250px;
+  height: 100%;
   margin: 10px auto;
-  background-image: url('imgs/table.png');
+  background-image: url('imgs/tablecrop.png');
   background-size: 100% 100%;
   padding: 20px;
 }
@@ -192,9 +210,16 @@ button:hover {
   display: hidden;
 }
 
+table {
+  height: 100%;
+  /*width: 100%;*/
+  /*margin-left: 10px;*/
+}
+
 td {
   max-width: 200px;
   max-height: 200px;
+  padding: 3px;
 }
 
 img {
