@@ -17,6 +17,10 @@
   outline: 1px red dashed;
 }*/
 
+html {
+  min-height: 100%;
+}
+
 body {
   background-color: rgb(245, 245, 220);
   background-image: -moz-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
@@ -118,7 +122,7 @@ a:visited {
   width: 1000px;
   height: 100%;
   margin: 10px auto;
-  background-image: url('imgs/table.png');
+  background-image: url('imgs/tablecrop.png');
   background-size: 100% 100%;
   padding: 20px;
 }
