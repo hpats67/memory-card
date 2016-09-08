@@ -8,9 +8,9 @@
   src: url('fonts/PPETRIAL.ttf');
 }
 
-* {
+/** {
   outline: 1px red dashed;
-}
+}*/
 
 body {
   background-color: rgb(245, 245, 220);
@@ -23,7 +23,7 @@ body {
 
 h1 {
   text-align: center;
-  font-size: 48px;
+  font-size: 69px;
   font-family: 'EraserRegular';
   color: white;
 }
@@ -34,36 +34,46 @@ h2, legend {
   font-weight: bold;
 }
 
+h3 {
+  text-align: center;
+  font-size: 45px;
+  font-family: 'EraserRegular';
+  color: white;
+}
+
 header, footer {
   margin: 10px auto;
-  border: 30px solid transparent;
+  border: 40px solid transparent;
   padding: 40px 20px;
   width: 630px;
   height: 130px;
   background-image: url('imgs/chalkboard.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
-  border-image: url('imgs/frame.png') 30 30 stretch;
+  border-image: url('imgs/frame.png') 40 40;
+}
+
+nav.navtop {
+  /* margin-top: 40px; */
+  text-align: center;
+  position: relative;
+  top: 32px;
+  clear: both;
+  height: 40px;
 }
 
 footer {
-  height: 40px;
+  height: 0px;
   padding: 0 20px;
   margin: 0 auto;
 }
 
-nav.navtop {
-  margin-top: 40px;
-  text-align: center;
-  clear: both;
-  height: 40px;
-}
 
 nav.navfooter {
   text-align: center;
   height: 40px;
   position: relative;
-  top: -10px;
+  top: -18px;
 }
 
 .navlist {
@@ -73,7 +83,7 @@ nav.navfooter {
   background-repeat: no-repeat;
   display: inline-block;
   width: 160px;
-  height: 60px;
+  height: 40px;
   margin: 0 10px;
 }
 
@@ -84,7 +94,8 @@ a.navlink {
   color: rgb(60, 60, 60);
   text-shadow: -1.5px -1.5px 1.5px #000;
   text-decoration: none;
-  top: 18px;
+  top: 9px;
+  left: 6px;
 }
 
 a:visited {
@@ -99,14 +110,14 @@ a:visited {
   padding: 20px;
 }
 
-.instructions, .high_score {
+.instructions {
   width: 560px;
   padding: 20px 80px;
   margin: 40px auto;
   background-image: url('imgs/paper.gif');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: 100% 100%;
 }
 
 hr {

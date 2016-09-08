@@ -1,0 +1,221 @@
+@font-face {
+  font-family: 'EraserRegular';
+  src: url('fonts/EraserRegular.ttf');
+}
+
+@font-face {
+  font-family: 'PPETRIAL';
+  src: url('fonts/PPETRIAL.ttf');
+}
+
+/** {
+  outline: 1px red dashed;
+}*/
+
+body {
+  background-color: rgb(245, 245, 220);
+  background-image: -moz-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(245, 245, 220)), to(rgb(211, 211, 211)));
+  background-image: -webkit-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
+  background-image: -o-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
+  background-repeat: no-repeat;
+}
+
+header, footer {
+  margin: 10px auto;
+  border: 40px solid transparent;
+  padding: 40px 20px;
+  width: 630px;
+  height: 325px;
+  background-image: url('imgs/chalkboard.jpg');
+  background-repeat: no-repeat;
+  border-image: url('imgs/frame.png') 40 40;
+}
+
+nav.navtop {
+  /* margin-top: 40px; */
+  text-align: center;
+  position: relative;
+  bottom: -89px;
+  clear: both;
+  height: 40px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 69px;
+  font-family: 'EraserRegular';
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  font-size: 45px;
+  font-family: 'EraserRegular';
+  color: white;
+}
+
+hr {
+  height: 0;
+  border: 1px white;
+}
+
+h3 {
+  font-size: 29px;
+  font-family: 'EraserRegular';
+  color: white;
+}
+
+.easy {
+  margin-left: 20px;
+  float: left;
+  width: 30%;
+}
+
+.medium {
+  float: left;
+  margin-left: 45px;
+  width: 30%;
+}
+
+.hard {
+  float: right;
+  width: 20%;
+}
+
+ol{
+  margin-left: 15px;
+}
+
+
+
+footer {
+  height: 0px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+
+nav.navfooter {
+  text-align: center;
+  height: 40px;
+  position: relative;
+  top: -18px;
+}
+
+.navlist {
+  background-image: url('imgs/metalplate.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 160px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+a.navlink {
+  position: relative;
+  font-size: 24px;
+  font-family: 'Suez One', serif;
+  color: rgb(60, 60, 60);
+  text-shadow: -1.5px -1.5px 1.5px #000;
+  text-decoration: none;
+  top: 9px;
+  left: 6px;
+}
+
+/*h4 {
+  width: 33%;
+  font-size: 28px;
+  font-family: 'PPETRIAL';
+  font-weight: bold;
+  background-image: url('imgs/paper.gif');
+
+}*/
+
+/*p {
+  font-family: 'PPETRIAL';
+  font-size: 20px;
+}*/
+
+ol {
+  list-style: upper-roman;
+  font-size: 20px;
+  font-family: 'EraserRegular';
+  color: white;
+}
+
+.scuttling {
+  width: 95%;
+  height: 825px;
+  margin: 0 auto;
+  margin-top: 45px;
+  background-image: url('imgs/paper2.gif');
+  background-repeat: no-repeat;;
+  background-position: left 190px;
+  background-size: 100%;
+}
+
+.people {
+  float: left;
+  max-width: 29%;
+  margin-left: 15px;
+}
+
+.people img {
+  border: 10px solid #fff;
+  border-bottom: 45px solid #fff;
+  box-shadow: 3px 3px 3px #777;
+  max-width: 150px;
+  margin-left: 15%;
+}
+
+.people img.tom {
+  transform: rotate(4deg);
+}
+
+.people img.chris {
+  transform: rotate(-3deg);
+}
+
+.people img.steven {
+  transform: rotate(2deg);
+}
+
+.people p {
+  font-family: 'PPETRIAL';
+  font-size: 15px;
+  margin-left: 5px;
+  margin-top: -15px;
+  line-height: 125%;
+}
+
+.people h4 {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  bottom: 35px;
+  font-size: 28px;
+  font-family: 'PPETRIAL';
+  font-weight: bold;
+}
+
+.people h5 {
+  font-size: 20px;
+  font-family: 'PPETRIAL';
+  font-weight: bold;
+  line-height: 125%;
+}
+
+.tablebackground {
+  width: 760px;
+  margin: 10px auto;
+  background-image: url('imgs/table.png');
+  background-size: 100% 100%;
+  padding: 20px;
+}
+
+.scuttling div:last-child {
+  margin-right: 0px;
+}
