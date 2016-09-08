@@ -120,13 +120,24 @@ a:visited {
 
 .tablebackground_game {
   width: 1000px;
-  min-height: 250px;
   height: 100%;
   margin: 10px auto;
   background-image: url('imgs/tablecrop.png');
   background-size: 100% 100%;
   padding: 20px;
 }
+
+.hint h3{
+  font-size: 20px;
+  color: black;
+}
+.hint img{
+  position: relative;
+  left: 48%;
+  max-height: 40px;
+  max-width: 40px;
+}
+
 
 .instructions {
   width: 560px;
@@ -170,7 +181,8 @@ legend {
 fieldset {
   width: 220px;
   padding: 15px;
-  margin: 15px;
+  margin: 10px;
+  margin-top: -11px;
 }
 
 label {
@@ -241,4 +253,20 @@ img {
 
 .scuttling div:last-child {
   margin-right: 0px;
+}
+
+.flipfront {
+  transform: rotateY(360deg);
+  perspective: 1000px;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flipback {
+  transform: rotateY(0deg);
+  perspective: 1000px;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
 }

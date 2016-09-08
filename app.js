@@ -1,9 +1,12 @@
 'use strict';
 
-function PlayerInfo(name, email, level) {
+var formInput;
+
+function PlayerInfo(name, email, level, cardset) {
   this.name = name;
   this.email = email;
   this.level = level;
+  this.cardset = cardset;
   this.score = 0;
 };
 
@@ -17,7 +20,8 @@ function submitData(event) {
   var name = event.target.name.value.trim();
   var email = event.target.email.value.trim();
   var level = event.target.level.value.trim();
-  var player = new PlayerInfo(name, email, level);
+  var cardset = event.target.cardset.value.trim();
+  var player = new PlayerInfo(name, email, level, cardset);
 
   storeData('current_player', player);
 
@@ -30,5 +34,5 @@ function submitData(event) {
 
 //main
 
-var formInput = document.getElementById('front_form');
+formInput = document.getElementById('front_form');
 formInput.addEventListener('submit', submitData, false);

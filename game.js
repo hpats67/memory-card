@@ -1,32 +1,23 @@
 'use strict';
-var imageArrayEasy = ['imgs/animals/bear.png', 'imgs/animals/bear.png', 'imgs/animals/deer.jpg', 'imgs/animals/deer.jpg', 'imgs/animals/elephant.jpg', 'imgs/animals/elephant.jpg'];
 
-var imageArrayMedium = ['imgs/posters/alien.jpg', 'imgs/posters/alien.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/bladerunner.jpg', 'imgs/posters/bladerunner.jpg'];
+//arrays to hold data
+var animalsArray = ['imgs/animals/alligator.jpg', 'imgs/animals/bear.png', 'imgs/animals/cat.jpg', 'imgs/animals/chicken.jpg', 'imgs/animals/cow.jpg', 'imgs/animals/deer.jpg', 'imgs/animals/dog.jpg', 'imgs/animals/eagle.jpg', 'imgs/animals/elephant.jpg', 'imgs/animals/flamingo.jpg', 'imgs/animals/giraffe.jpg', 'imgs/animals/gorilla.jpg', 'imgs/animals/hippo.jpg', 'imgs/animals/horse.jpg', 'imgs/animals/lion.jpg', 'imgs/animals/lizard.jpg', 'imgs/animals/mouse.jpg', 'imgs/animals/parrot.jpg', 'imgs/animals/pig.jpg', 'imgs/animals/sheep.jpg', 'imgs/animals/sloth.jpg', 'imgs/animals/snake.jpg', 'imgs/animals/tiger.jpg', 'imgs/animals/turtle.jpg'];
 
-var imageArrayHard = ['imgs/posters/alien.jpg', 'imgs/posters/alien.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/bladerunner.jpg','imgs/posters/bladerunner.jpg','imgs/posters/silenceofthelambs.jpg', 'imgs/posters/silenceofthelambs.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/avengers.jpg', 'imgs/posters/avengers.jpg'];
+var cardsArray = ['imgs/cards/10clubs.jpg', 'imgs/cards/10hearts.jpg', 'imgs/cards/acehearts.jpg', 'imgs/cards/acespades.jpg', 'imgs/cards/jackdiamonds.jpg', 'imgs/cards/jackspades.jpg', 'imgs/cards/joker1.jpg', 'imgs/cards/joker2.png', 'imgs/cards/kinghearts.jpg', 'imgs/cards/kingspades.jpg', 'imgs/cards/queenhearts.jpg', 'imgs/cards/queenspades.jpg', 'imgs/cards/10spades.png', 'imgs/cards/10diamonds.png', 'imgs/cards/jackhearts.png', 'imgs/cards/jackclubs.png', 'imgs/cards/queendiamonds.jpg', 'imgs/cards/queenclubs.jpg', 'imgs/cards/kingdiamonds.png', 'imgs/cards/kingclubs.png', 'imgs/cards/aceclubs.png', 'imgs/cards/acediamonds.png', 'imgs/cards/joker3.jpg', 'imgs/cards/joker4.jpg' ];
 
-// function to parse from local storage and grab level
-function getLevel(){
-  level = JSON.parse(localStorage.getItem('current_player'));
-  level1 = level.level;
-}
-getLevel();
-console.log(level);
-console.log(level1);
-function getArray(){
-  if (level1 === 'easy'){
-    imageArray = imageArrayEasy;
-  } else if (level1 === 'medium') {
-    imageArray = imageArrayMedium;
-  }else{
-    imageArray = imageArrayHard;
-  };
-}
-getArray();
+var moviesArray = ['imgs/posters/alien.jpg', 'imgs/posters/avengers.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/bladerunner.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/deadpool.jpg', 'imgs/posters/findingnemo.jpg', 'imgs/posters/forceawakens.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/greatoutdoors.jpg', 'imgs/posters/hackers.jpg', 'imgs/posters/hotfuzz.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/johnwick.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/martian.jpg', 'imgs/posters/meangirls.jpg', 'imgs/posters/notebook.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/silenceofthelambs.jpg', 'imgs/posters/startrek.jpg', 'imgs/posters/starwars.jpg'];
+
+var cardDictionary = {
+  animals: animalsArray,
+  cards: cardsArray,
+  movies: moviesArray,
+};
+
 // Variables to capture game level
 var level;
 var level1;
-var imageArray;
+var key1;
+var imageArray = [];
 var altImage = 'imgs/back.png';
 // counts correct pairs
 var countCorrect = 0;
@@ -47,15 +38,39 @@ var selecting = false;
 // holds the current player object
 var playerObject;
 
+var shuffledArray;
+
+// function to parse from local storage and grab level
+function getGameParam(){
+  level = JSON.parse(localStorage.getItem('current_player'));
+  level1 = level.level;
+  key1 = level.cardset;
+};
+
 function shuffleArray(array){
-  for (var i = imageArray.length - 1; i > 0; i--){
+  for (var i = array.length - 1; i > 0; i--){
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];
     array[i] = array[j];
     array[j] = temp;
-  }
+  };
   return array;
-}
+};
+
+function grabItems(array, difficulty) {
+  var itemsNeeded = 0;
+  if (difficulty === 'easy') {
+    itemsNeeded = 3;
+  } else if (difficulty === 'medium') {
+    itemsNeeded = 6;
+  } else {
+    itemsNeeded = 12;
+  };
+  for (var i = 0; i < itemsNeeded; i++) {
+    imageArray.push(array[i]);
+    imageArray.push(array[i]);
+  };
+};
 
 function buildTable(){
   var iA = 0;
@@ -75,14 +90,10 @@ function buildTable(){
       iA += 1;
       tData.appendChild(image);
       tRow.appendChild(tData);
-    }
+    };
     table.appendChild(tRow);
-  }
-}
-shuffleArray(imageArray);
-buildTable();
-
-picSelector.addEventListener('click', clickHandler);
+  };
+};
 
 function clickHandler(event){
   //getting attributes the clicked image
@@ -100,9 +111,8 @@ function clickHandler(event){
   countTotal += 1;
   //beginning flip of clicked photo
   event.target.setAttribute('src', faceUp);
+  event.target.setAttribute('class', 'flipfront');
   choiceIndexArray.push(choiceIndex);
-  //function to stop selecting already correct Pairs
-  console.log('click' + event.target);
   //if statements made to determine what will happen upon clicking of photo
   //comparing clicked images
   if (choiceIndexArray[0] !== choiceIndexArray[1]) {
@@ -114,10 +124,9 @@ function clickHandler(event){
       //back if the second choice is wrong
       if (!firstChoice){
         firstChoice = event.target;
-      }
+      };
       //script after two choices are made
       if(choiceArray.length === 2){
-        console.log('choice.length' + choiceArray);
         //script if choices are MATCHING
         if(choiceArray[0] === choiceArray[1]){
           pushCctPairs();
@@ -126,36 +135,34 @@ function clickHandler(event){
             //timeout to allow seeing the final choice
             setTimeout(finished, 500);
           }
-          console.log(true);
-          console.log(choiceArray);
           //what will happen if choices are NOT MATCHING
-        } else{
+        } else {
           choiceNotMatching(event, faceDown);
-        }
-      }
+        };
+      };
     //else if choice has already been matched
-    }else {
+    } else {
       alert('Please make another choice.');
       choiceArray = [];
       firstChoice.setAttribute('src', faceDown);
       firstChoice = null;
-    }
+    };
   //else if same card is picked twice
-  }else {
+  } else {
     setTimeout(function(){flipCards(event, faceDown);}, 0),
     alert('please click a separate card, start over');
     choiceArray = [];
     choiceIndexArray = [];
-  }
-  console.log(countCorrect + 'correct count');
-  console.log(countTotal + 'total count');
-}
+  };
+};
 
 //function to flip cards and allow for setTimout
 function flipCards(event, faceDown) {
   selecting = false;
   event.target.setAttribute('src', faceDown);
+  event.target.setAttribute('class', 'flipback');
   firstChoice.setAttribute('src', faceDown);
+  firstChoice.setAttribute('class', 'flipback');
   firstChoice = null;
   event.target.disable = false;
 };
@@ -180,8 +187,7 @@ function choiceNotMatching(event, faceDown) {
   setTimeout(function(){flipCards(event, faceDown);}, 1000);
   choiceArray = [];
   choiceIndexArray = [];
-  console.log(choiceArray);
-}
+};
 
 function pullPushHighScoreArray(object) {
   var jsonArray;
@@ -207,3 +213,12 @@ function updatePlayerInfo(countTotal) {
   localStorage.setItem('current_player', returnPlayer);
   return playerObject;
 };
+
+//main
+
+getGameParam();
+shuffledArray = shuffleArray(cardDictionary[key1]);
+grabItems(shuffledArray, level1);
+imageArray = shuffleArray(imageArray);
+buildTable();
+picSelector.addEventListener('click', clickHandler);
