@@ -120,22 +120,20 @@ a:visited {
 
 .tablebackground_game {
   width: 1000px;
-  min-height: 250px;
   height: 100%;
   margin: 10px auto;
   background-image: url('imgs/tablecrop.png');
   background-size: 100% 100%;
   padding: 20px;
 }
-.hint {
-  margin: 0 auto;
-}
+
 .hint h3{
   font-size: 20px;
   color: black;
 }
 .hint img{
-  margin: 0 614px;
+  position: relative;
+  left: 48%;
   max-height: 40px;
   max-width: 40px;
 }
@@ -183,7 +181,8 @@ legend {
 fieldset {
   width: 220px;
   padding: 15px;
-  margin: 15px;
+  margin: 10px;
+  margin-top: -11px;
 }
 
 label {
