@@ -110,6 +110,15 @@ a:visited {
   padding: 20px;
 }
 
+.tablebackground_game {
+  width: 1000px;
+  height: 100%;
+  margin: 10px auto;
+  background-image: url('imgs/table.png');
+  background-size: 100% 100%;
+  padding: 20px;
+}
+
 .instructions {
   width: 560px;
   padding: 20px 80px;
@@ -192,9 +201,16 @@ button:hover {
   display: hidden;
 }
 
+table {
+  height: 100%;
+  /*width: 100%;*/
+  margin-left: 12px;
+}
+
 td {
   max-width: 200px;
   max-height: 200px;
+  padding: 8px;
 }
 
 img {
