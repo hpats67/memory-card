@@ -116,6 +116,7 @@ function clickHandler(event){
   //if statements made to determine what will happen upon clicking of photo
   //comparing clicked images
   if (choiceIndexArray[0] !== choiceIndexArray[1]) {
+    console.log(choiceIndexArray);
     choiceArray.push(faceUp);
     //comparing if clicked choice is already matched in order to
     //prevent the same correct choices to be clicked again
@@ -137,6 +138,7 @@ function clickHandler(event){
           }
           //what will happen if choices are NOT MATCHING
         } else {
+          selecting = true;
           choiceNotMatching(event, faceDown);
         };
       };
@@ -144,11 +146,14 @@ function clickHandler(event){
     } else {
       alert('Please make another choice.');
       choiceArray = [];
+      choiceIndexArray = [];
       firstChoice.setAttribute('src', faceDown);
+      firstChoice.setAttribute('class', 'flipback');
       firstChoice = null;
     };
   //else if same card is picked twice
   } else {
+    selecting = false;
     setTimeout(function(){flipCards(event, faceDown);}, 0),
     alert('please click a separate card, start over');
     choiceArray = [];
