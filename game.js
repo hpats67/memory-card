@@ -1,5 +1,5 @@
 'use strict';
-var imageArrayEasy = ['imgs/animals/bear.png', 'imgs/animals/bear.png', 'imgs/animals/deer.gif', 'imgs/animals/deer.gif', 'imgs/animals/elephant.jpg', 'imgs/animals/elephant.jpg'];
+var imageArrayEasy = ['imgs/animals/bear.png', 'imgs/animals/bear.png', 'imgs/animals/deer.jpg', 'imgs/animals/deer.jpg', 'imgs/animals/elephant.jpg', 'imgs/animals/elephant.jpg'];
 
 var imageArrayMedium = ['imgs/posters/alien.jpg', 'imgs/posters/alien.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/bladerunner.jpg', 'imgs/posters/bladerunner.jpg'];
 
