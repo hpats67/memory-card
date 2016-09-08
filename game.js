@@ -171,7 +171,7 @@ function pushCctPairs() {
 function finished(){
   playerObject = updatePlayerInfo(countTotal);
   pullPushHighScoreArray(playerObject);
-  alert('You got them all!');
+  alert('Congratulations! You solved the game in ' + countTotal + ' clicks!');
   window.location = 'about-info.html';
 };
 

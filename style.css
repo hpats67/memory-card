@@ -17,6 +17,10 @@
   outline: 1px red dashed;
 }*/
 
+html {
+  min-height: 100%;
+}
+
 body {
   background-color: rgb(245, 245, 220);
   background-image: -moz-linear-gradient(rgb(245, 245, 220), rgb(211, 211, 211));
