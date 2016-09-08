@@ -13,29 +13,6 @@ var cardDictionary = {
   movies: moviesArray,
 };
 
-<<<<<<< HEAD
-=======
-// function to parse from local storage and grab level
-function getGameParam(){
-  level = JSON.parse(localStorage.getItem('current_player'));
-  level1 = level.level;
-  key1 = level.cardset;
-}
-getGameParam();
-
-console.log(level);
-console.log(level1);
-// function getArray(){
-//   if (level1 === 'easy'){
-//     imageArray = imageArrayEasy;
-//   } else if (level1 === 'medium') {
-//     imageArray = imageArrayMedium;
-//   }else{
-//     imageArray = imageArrayHard;
-//   };
-// }
-//getArray();
->>>>>>> cf05d8b33bcf2ffe5e6be2b67c4832fbc6eb96ab
 // Variables to capture game level
 var level;
 var level1;
