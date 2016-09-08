@@ -255,3 +255,19 @@ img {
 .scuttling div:last-child {
   margin-right: 0px;
 }
+
+.flipfront {
+  transform: rotateY(360deg);
+  perspective: 1000px;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flipback {
+  transform: rotateY(0deg);
+  perspective: 1000px;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+}

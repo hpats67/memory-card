@@ -1,5 +1,7 @@
 'use strict';
 
+var formInput;
+
 function PlayerInfo(name, email, level, cardset) {
   this.name = name;
   this.email = email;
@@ -32,5 +34,5 @@ function submitData(event) {
 
 //main
 
-var formInput = document.getElementById('front_form');
+formInput = document.getElementById('front_form');
 formInput.addEventListener('submit', submitData, false);

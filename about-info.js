@@ -20,22 +20,17 @@ function objectSort(array) {
   return sorted;
 };
 
-highScores = getScores();
-sortedHighScores = objectSort(highScores);
-
-for (var j = 0; j < sortedHighScores.length; j++){
-  if (sortedHighScores[j].level === 'easy'){
-    sortedHighScoresEasy.push(sortedHighScores[j]);
-  }else if (sortedHighScores[j].level === 'medium') {
-    sortedHighScoresMed.push(sortedHighScores[j]);
-  }else{
-    sortedHighScoresHard.push(sortedHighScores[j]);
-  }
-}
-
-buildHighScore(sortedHighScoresEasy, 'high_score_easy');
-buildHighScore(sortedHighScoresMed, 'high_score_med');
-buildHighScore(sortedHighScoresHard, 'high_score_hard');
+function distributeObjects() {
+  for (var j = 0; j < sortedHighScores.length; j++){
+    if (sortedHighScores[j].level === 'easy'){
+      sortedHighScoresEasy.push(sortedHighScores[j]);
+    } else if (sortedHighScores[j].level === 'medium') {
+      sortedHighScoresMed.push(sortedHighScores[j]);
+    } else {
+      sortedHighScoresHard.push(sortedHighScores[j]);
+    };
+  };
+};
 
 function buildHighScore(array, string) {
   var scoreList = document.getElementById(string);
@@ -47,4 +42,12 @@ function buildHighScore(array, string) {
     scoreList.appendChild(li);
   };
 };
+
 //main
+
+highScores = getScores();
+sortedHighScores = objectSort(highScores);
+distributeObjects();
+buildHighScore(sortedHighScoresEasy, 'high_score_easy');
+buildHighScore(sortedHighScoresMed, 'high_score_med');
+buildHighScore(sortedHighScoresHard, 'high_score_hard');

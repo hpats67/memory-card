@@ -1,5 +1,6 @@
 'use strict';
 
+//arrays to hold data
 var animalsArray = ['imgs/animals/alligator.jpg', 'imgs/animals/bear.png', 'imgs/animals/cat.jpg', 'imgs/animals/chicken.jpg', 'imgs/animals/cow.jpg', 'imgs/animals/deer.jpg', 'imgs/animals/dog.jpg', 'imgs/animals/eagle.jpg', 'imgs/animals/elephant.jpg', 'imgs/animals/flamingo.jpg', 'imgs/animals/giraffe.jpg', 'imgs/animals/gorilla.jpg', 'imgs/animals/hippo.jpg', 'imgs/animals/horse.jpg', 'imgs/animals/lion.jpg', 'imgs/animals/lizard.jpg', 'imgs/animals/mouse.jpg', 'imgs/animals/parrot.jpg', 'imgs/animals/pig.jpg', 'imgs/animals/sheep.jpg', 'imgs/animals/sloth.jpg', 'imgs/animals/snake.jpg', 'imgs/animals/tiger.jpg', 'imgs/animals/turtle.jpg'];
 
 var cardsArray = ['imgs/cards/10clubs.jpg', 'imgs/cards/10hearts.jpg', 'imgs/cards/acehearts.jpg', 'imgs/cards/acespades.jpg', 'imgs/cards/jackdiamonds.jpg', 'imgs/cards/jackspades.jpg', 'imgs/cards/joker1.jpg', 'imgs/cards/joker2.png', 'imgs/cards/kinghearts.jpg', 'imgs/cards/kingspades.jpg', 'imgs/cards/queenhearts.jpg', 'imgs/cards/queenspades.jpg'];
@@ -12,26 +13,6 @@ var cardDictionary = {
   movies: moviesArray,
 };
 
-// function to parse from local storage and grab level
-function getGameParam(){
-  level = JSON.parse(localStorage.getItem('current_player'));
-  level1 = level.level;
-  key1 = level.cardset;
-}
-getGameParam();
-
-console.log(level);
-console.log(level1);
-function getArray(){
-  if (level1 === 'easy'){
-    imageArray = imageArrayEasy;
-  } else if (level1 === 'medium') {
-    imageArray = imageArrayMedium;
-  }else{
-    imageArray = imageArrayHard;
-  };
-}
-//getArray();
 // Variables to capture game level
 var level;
 var level1;
@@ -57,19 +38,26 @@ var selecting = false;
 // holds the current player object
 var playerObject;
 
+var shuffledArray;
+
+// function to parse from local storage and grab level
+function getGameParam(){
+  level = JSON.parse(localStorage.getItem('current_player'));
+  level1 = level.level;
+  key1 = level.cardset;
+};
+
 function shuffleArray(array){
   for (var i = array.length - 1; i > 0; i--){
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];
     array[i] = array[j];
     array[j] = temp;
-  }
+  };
   return array;
-}
+};
 
-var shuffledArray = shuffleArray(cardDictionary[key1]);
-
-function grabItems (array, difficulty) {
+function grabItems(array, difficulty) {
   var itemsNeeded = 0;
   if (difficulty === 'easy') {
     itemsNeeded = 3;
@@ -83,9 +71,6 @@ function grabItems (array, difficulty) {
     imageArray.push(array[i]);
   };
 };
-
-grabItems(shuffledArray, level1);
-imageArray = shuffleArray(imageArray);
 
 function buildTable(){
   var iA = 0;
@@ -105,14 +90,10 @@ function buildTable(){
       iA += 1;
       tData.appendChild(image);
       tRow.appendChild(tData);
-    }
+    };
     table.appendChild(tRow);
-  }
-}
-shuffleArray(imageArray);
-buildTable();
-
-picSelector.addEventListener('click', clickHandler);
+  };
+};
 
 function clickHandler(event){
   //getting attributes the clicked image
@@ -130,9 +111,8 @@ function clickHandler(event){
   countTotal += 1;
   //beginning flip of clicked photo
   event.target.setAttribute('src', faceUp);
+  event.target.setAttribute('class', 'flipfront');
   choiceIndexArray.push(choiceIndex);
-  //function to stop selecting already correct Pairs
-  console.log('click' + event.target);
   //if statements made to determine what will happen upon clicking of photo
   //comparing clicked images
   if (choiceIndexArray[0] !== choiceIndexArray[1]) {
@@ -144,10 +124,9 @@ function clickHandler(event){
       //back if the second choice is wrong
       if (!firstChoice){
         firstChoice = event.target;
-      }
+      };
       //script after two choices are made
       if(choiceArray.length === 2){
-        console.log('choice.length' + choiceArray);
         //script if choices are MATCHING
         if(choiceArray[0] === choiceArray[1]){
           pushCctPairs();
@@ -156,36 +135,34 @@ function clickHandler(event){
             //timeout to allow seeing the final choice
             setTimeout(finished, 500);
           }
-          console.log(true);
-          console.log(choiceArray);
           //what will happen if choices are NOT MATCHING
-        } else{
+        } else {
           choiceNotMatching(event, faceDown);
-        }
-      }
+        };
+      };
     //else if choice has already been matched
-    }else {
+    } else {
       alert('Please make another choice.');
       choiceArray = [];
       firstChoice.setAttribute('src', faceDown);
       firstChoice = null;
-    }
+    };
   //else if same card is picked twice
-  }else {
+  } else {
     setTimeout(function(){flipCards(event, faceDown);}, 0),
     alert('please click a separate card, start over');
     choiceArray = [];
     choiceIndexArray = [];
-  }
-  console.log(countCorrect + 'correct count');
-  console.log(countTotal + 'total count');
-}
+  };
+};
 
 //function to flip cards and allow for setTimout
 function flipCards(event, faceDown) {
   selecting = false;
   event.target.setAttribute('src', faceDown);
+  event.target.setAttribute('class', 'flipback');
   firstChoice.setAttribute('src', faceDown);
+  firstChoice.setAttribute('class', 'flipback');
   firstChoice = null;
   event.target.disable = false;
 };
@@ -210,8 +187,7 @@ function choiceNotMatching(event, faceDown) {
   setTimeout(function(){flipCards(event, faceDown);}, 1000);
   choiceArray = [];
   choiceIndexArray = [];
-  console.log(choiceArray);
-}
+};
 
 function pullPushHighScoreArray(object) {
   var jsonArray;
@@ -237,3 +213,12 @@ function updatePlayerInfo(countTotal) {
   localStorage.setItem('current_player', returnPlayer);
   return playerObject;
 };
+
+//main
+
+getGameParam();
+shuffledArray = shuffleArray(cardDictionary[key1]);
+grabItems(shuffledArray, level1);
+imageArray = shuffleArray(imageArray);
+buildTable();
+picSelector.addEventListener('click', clickHandler);
