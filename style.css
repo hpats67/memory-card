@@ -127,6 +127,19 @@ a:visited {
   background-size: 100% 100%;
   padding: 20px;
 }
+.hint {
+  margin: 0 auto;
+}
+.hint h3{
+  font-size: 20px;
+  color: black;
+}
+.hint img{
+  margin: 0 614px;
+  max-height: 40px;
+  max-width: 40px;
+}
+
 
 .instructions {
   width: 560px;
