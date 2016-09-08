@@ -1,16 +1,25 @@
 'use strict';
-var imageArrayEasy = ['imgs/animals/bear.png', 'imgs/animals/bear.png', 'imgs/animals/deer.jpg', 'imgs/animals/deer.jpg', 'imgs/animals/elephant.jpg', 'imgs/animals/elephant.jpg'];
 
-var imageArrayMedium = ['imgs/posters/alien.jpg', 'imgs/posters/alien.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/bladerunner.jpg', 'imgs/posters/bladerunner.jpg'];
+var animalsArray = ['imgs/animals/alligator.jpg', 'imgs/animals/bear.png', 'imgs/animals/cat.jpg', 'imgs/animals/chicken.jpg', 'imgs/animals/cow.jpg', 'imgs/animals/deer.jpg', 'imgs/animals/dog.jpg', 'imgs/animals/eagle.jpg', 'imgs/animals/elephant.jpg', 'imgs/animals/flamingo.jpg', 'imgs/animals/giraffe.jpg', 'imgs/animals/gorilla.jpg', 'imgs/animals/hippo.jpg', 'imgs/animals/horse.jpg', 'imgs/animals/lion.jpg', 'imgs/animals/lizard.jpg', 'imgs/animals/mouse.jpg', 'imgs/animals/parrot.jpg', 'imgs/animals/pig.jpg', 'imgs/animals/sheep.jpg', 'imgs/animals/sloth.jpg', 'imgs/animals/snake.jpg', 'imgs/animals/tiger.jpg', 'imgs/animals/turtle.jpg'];
 
-var imageArrayHard = ['imgs/posters/alien.jpg', 'imgs/posters/alien.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/starwars.jpg', 'imgs/posters/bladerunner.jpg','imgs/posters/bladerunner.jpg','imgs/posters/silenceofthelambs.jpg', 'imgs/posters/silenceofthelambs.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/avengers.jpg', 'imgs/posters/avengers.jpg'];
+var cardsArray = ['imgs/cards/10clubs.jpg', 'imgs/cards/10hearts.jpg', 'imgs/cards/acehearts.jpg', 'imgs/cards/acespades.jpg', 'imgs/cards/jackdiamonds.jpg', 'imgs/cards/jackspades.jpg', 'imgs/cards/joker1.jpg', 'imgs/cards/joker2.png', 'imgs/cards/kinghearts.jpg', 'imgs/cards/kingspades.jpg', 'imgs/cards/queenhearts.jpg', 'imgs/cards/queenspades.jpg'];
+
+var moviesArray = ['imgs/posters/alien.jpg', 'imgs/posters/avengers.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/bladerunner.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/deadpool.jpg', 'imgs/posters/findingnemo.jpg', 'imgs/posters/forceawakens.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/greatoutdoors.jpg', 'imgs/posters/hackers.jpg', 'imgs/posters/hotfuzz.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/johnwick.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/martian.jpg', 'imgs/posters/meangirls.jpg', 'imgs/posters/notebook.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/silenceofthelambs.jpg', 'imgs/posters/startrek.jpg', 'imgs/posters/starwars.jpg'];
+
+var cardDictionary = {
+  animals: animalsArray,
+  cards: cardsArray,
+  movies: moviesArray,
+};
 
 // function to parse from local storage and grab level
-function getLevel(){
+function getGameParam(){
   level = JSON.parse(localStorage.getItem('current_player'));
   level1 = level.level;
+  key1 = level.cardset;
 }
-getLevel();
+getGameParam();
+
 console.log(level);
 console.log(level1);
 function getArray(){
@@ -22,11 +31,12 @@ function getArray(){
     imageArray = imageArrayHard;
   };
 }
-getArray();
+//getArray();
 // Variables to capture game level
 var level;
 var level1;
-var imageArray;
+var key1;
+var imageArray = [];
 var altImage = 'imgs/back.png';
 // counts correct pairs
 var countCorrect = 0;
@@ -48,7 +58,7 @@ var selecting = false;
 var playerObject;
 
 function shuffleArray(array){
-  for (var i = imageArray.length - 1; i > 0; i--){
+  for (var i = array.length - 1; i > 0; i--){
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];
     array[i] = array[j];
@@ -56,6 +66,26 @@ function shuffleArray(array){
   }
   return array;
 }
+
+var shuffledArray = shuffleArray(cardDictionary[key1]);
+
+function grabItems (array, difficulty) {
+  var itemsNeeded = 0;
+  if (difficulty === 'easy') {
+    itemsNeeded = 3;
+  } else if (difficulty === 'medium') {
+    itemsNeeded = 6;
+  } else {
+    itemsNeeded = 12;
+  };
+  for (var i = 0; i < itemsNeeded; i++) {
+    imageArray.push(array[i]);
+    imageArray.push(array[i]);
+  };
+};
+
+grabItems(shuffledArray, level1);
+imageArray = shuffleArray(imageArray);
 
 function buildTable(){
   var iA = 0;
