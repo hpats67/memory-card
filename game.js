@@ -24,7 +24,7 @@ var countCorrect = 0;
 // counts total clicks
 var countTotal = 0;
 // selects game table
-var picSelector = document.getElementById('game_table');
+var picSelector;
 // creates array which clicked choices will be stored
 var choiceArray = [];
 // creates array to prevent the same image from being chosen
@@ -72,7 +72,66 @@ function grabItems(array, difficulty) {
   };
 };
 
-function buildTable(){
+
+//function to flip cards and allow for setTimout
+function flipCards(event, faceDown) {
+  selecting = false;
+  event.target.setAttribute('src', faceDown);
+  event.target.setAttribute('class', 'flipback');
+  firstChoice.setAttribute('src', faceDown);
+  firstChoice.setAttribute('class', 'flipback');
+  firstChoice = null;
+  event.target.disable = false;
+};
+
+function pushCctPairs() {
+  correctPairs.push(choiceArray[0]);
+  choiceArray = [];
+  choiceIndexArray = [];
+  countCorrect += 1;
+  firstChoice = null;
+};
+
+function finished(){
+  playerObject = updatePlayerInfo(countTotal);
+  pullPushHighScoreArray(playerObject);
+  alert('Congratulations! You solved the game in ' + countTotal + ' clicks!');
+  window.location = 'about-info.html';
+};
+
+function choiceNotMatching(event, faceDown) {
+  selecting = true;
+  setTimeout(function(){flipCards(event, faceDown);}, 1000);
+  choiceArray = [];
+  choiceIndexArray = [];
+};
+
+function pullPushHighScoreArray(object) {
+  var jsonArray;
+  var updatedArray;
+  var newArray;
+  if (localStorage.getItem('high_score_array')) {
+    jsonArray = JSON.parse(localStorage.getItem('high_score_array'));
+    jsonArray.push(object);
+    updatedArray = JSON.stringify(jsonArray);
+    localStorage.setItem('high_score_array', updatedArray);
+  } else {
+    newArray = JSON.stringify([object]);
+    localStorage.setItem('high_score_array', newArray);
+  };
+};
+
+function updatePlayerInfo(countTotal) {
+  var playerObject;
+  var returnPlayer;
+  playerObject = JSON.parse(localStorage.getItem('current_player'));
+  playerObject.score = countTotal;
+  returnPlayer = JSON.stringify(playerObject);
+  localStorage.setItem('current_player', returnPlayer);
+  return playerObject;
+};
+
+function buildTable(imageArray){
   var iA = 0;
   var table = document.getElementById('game_table');
   var tRow;
@@ -161,69 +220,12 @@ function clickHandler(event){
   };
 };
 
-//function to flip cards and allow for setTimout
-function flipCards(event, faceDown) {
-  selecting = false;
-  event.target.setAttribute('src', faceDown);
-  event.target.setAttribute('class', 'flipback');
-  firstChoice.setAttribute('src', faceDown);
-  firstChoice.setAttribute('class', 'flipback');
-  firstChoice = null;
-  event.target.disable = false;
-};
-
-function pushCctPairs() {
-  correctPairs.push(choiceArray[0]);
-  choiceArray = [];
-  choiceIndexArray = [];
-  countCorrect += 1;
-  firstChoice = null;
-};
-
-function finished(){
-  playerObject = updatePlayerInfo(countTotal);
-  pullPushHighScoreArray(playerObject);
-  alert('Congratulations! You solved the game in ' + countTotal + ' clicks!');
-  window.location = 'about-info.html';
-};
-
-function choiceNotMatching(event, faceDown) {
-  selecting = true;
-  setTimeout(function(){flipCards(event, faceDown);}, 1000);
-  choiceArray = [];
-  choiceIndexArray = [];
-};
-
-function pullPushHighScoreArray(object) {
-  var jsonArray;
-  var updatedArray;
-  var newArray;
-  if (localStorage.getItem('high_score_array')) {
-    jsonArray = JSON.parse(localStorage.getItem('high_score_array'));
-    jsonArray.push(object);
-    updatedArray = JSON.stringify(jsonArray);
-    localStorage.setItem('high_score_array', updatedArray);
-  } else {
-    newArray = JSON.stringify([object]);
-    localStorage.setItem('high_score_array', newArray);
-  };
-};
-
-function updatePlayerInfo(countTotal) {
-  var playerObject;
-  var returnPlayer;
-  playerObject = JSON.parse(localStorage.getItem('current_player'));
-  playerObject.score = countTotal;
-  returnPlayer = JSON.stringify(playerObject);
-  localStorage.setItem('current_player', returnPlayer);
-  return playerObject;
-};
-
 //main
 
 getGameParam();
 shuffledArray = shuffleArray(cardDictionary[key1]);
 grabItems(shuffledArray, level1);
 imageArray = shuffleArray(imageArray);
-buildTable();
+buildTable(imageArray);
+picSelector = document.getElementById('game_table');
 picSelector.addEventListener('click', clickHandler);
