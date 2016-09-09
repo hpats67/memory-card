@@ -3,7 +3,7 @@
 //arrays to hold data
 var animalsArray = ['imgs/animals/alligator.jpg', 'imgs/animals/bear.png', 'imgs/animals/cat.jpg', 'imgs/animals/chicken.jpg', 'imgs/animals/cow.jpg', 'imgs/animals/deer.jpg', 'imgs/animals/dog.jpg', 'imgs/animals/eagle.jpg', 'imgs/animals/elephant.jpg', 'imgs/animals/flamingo.jpg', 'imgs/animals/giraffe.jpg', 'imgs/animals/gorilla.jpg', 'imgs/animals/hippo.jpg', 'imgs/animals/horse.jpg', 'imgs/animals/lion.jpg', 'imgs/animals/lizard.jpg', 'imgs/animals/mouse.jpg', 'imgs/animals/parrot.jpg', 'imgs/animals/pig.jpg', 'imgs/animals/sheep.jpg', 'imgs/animals/sloth.jpg', 'imgs/animals/snake.jpg', 'imgs/animals/tiger.jpg', 'imgs/animals/turtle.jpg'];
 
-var cardsArray = ['imgs/cards/10clubs.jpg', 'imgs/cards/10hearts.jpg', 'imgs/cards/acehearts.jpg', 'imgs/cards/acespades.jpg', 'imgs/cards/jackdiamonds.jpg', 'imgs/cards/jackspades.jpg', 'imgs/cards/joker1.jpg', 'imgs/cards/joker2.png', 'imgs/cards/kinghearts.jpg', 'imgs/cards/kingspades.jpg', 'imgs/cards/queenhearts.jpg', 'imgs/cards/queenspades.jpg', 'imgs/cards/10spades.png', 'imgs/cards/10diamonds.png', 'imgs/cards/jackhearts.png', 'imgs/cards/jackclubs.png', 'imgs/cards/queendiamonds.jpg', 'imgs/cards/queenclubs.jpg', 'imgs/cards/kingdiamonds.png', 'imgs/cards/kingclubs.png', 'imgs/cards/aceclubs.png', 'imgs/cards/acediamonds.png', 'imgs/cards/joker3.jpg', 'imgs/cards/joker4.jpg' ];
+var cardsArray = ['imgs/cards/10clubs.jpg', 'imgs/cards/10hearts.png', 'imgs/cards/acehearts.jpg', 'imgs/cards/acespades.jpg', 'imgs/cards/jackdiamonds.jpg', 'imgs/cards/jackspades.jpg', 'imgs/cards/joker1.jpg', 'imgs/cards/joker2.png', 'imgs/cards/kinghearts.jpg', 'imgs/cards/kingspades.jpg', 'imgs/cards/queenhearts.jpg', 'imgs/cards/queenspades.jpg', 'imgs/cards/10spades.png', 'imgs/cards/10diamonds.png', 'imgs/cards/jackhearts.png', 'imgs/cards/jackclubs.png', 'imgs/cards/queendiamonds.jpg', 'imgs/cards/queenclubs.jpg', 'imgs/cards/kingdiamonds.png', 'imgs/cards/kingclubs.png', 'imgs/cards/aceclubs.png', 'imgs/cards/acediamonds.png', 'imgs/cards/joker3.jpg', 'imgs/cards/joker4.jpg' ];
 
 var moviesArray = ['imgs/posters/alien.jpg', 'imgs/posters/avengers.jpg', 'imgs/posters/backtothefuture.jpg', 'imgs/posters/bladerunner.jpg', 'imgs/posters/darkknight.jpg', 'imgs/posters/deadpool.jpg', 'imgs/posters/findingnemo.jpg', 'imgs/posters/forceawakens.jpg', 'imgs/posters/ghostbuster.jpg', 'imgs/posters/greatoutdoors.jpg', 'imgs/posters/hackers.jpg', 'imgs/posters/hotfuzz.jpg', 'imgs/posters/indianajones.jpg', 'imgs/posters/jaws.jpg', 'imgs/posters/johnwick.jpg', 'imgs/posters/jurassicpark.jpg', 'imgs/posters/martian.jpg', 'imgs/posters/meangirls.jpg', 'imgs/posters/notebook.jpg', 'imgs/posters/rocky.jpg', 'imgs/posters/silenceofthelambs.jpg', 'imgs/posters/startrek.jpg', 'imgs/posters/starwars.jpg'];
 
@@ -24,7 +24,7 @@ var countCorrect = 0;
 // counts total clicks
 var countTotal = 0;
 // selects game table
-var picSelector = document.getElementById('game_table');
+var picSelector;
 // creates array which clicked choices will be stored
 var choiceArray = [];
 // creates array to prevent the same image from being chosen
@@ -72,7 +72,66 @@ function grabItems(array, difficulty) {
   };
 };
 
-function buildTable(){
+
+//function to flip cards and allow for setTimout
+function flipCards(event, faceDown) {
+  selecting = false;
+  event.target.setAttribute('src', faceDown);
+  event.target.setAttribute('class', 'flipback');
+  firstChoice.setAttribute('src', faceDown);
+  firstChoice.setAttribute('class', 'flipback');
+  firstChoice = null;
+  event.target.disable = false;
+};
+
+function pushCctPairs() {
+  correctPairs.push(choiceArray[0]);
+  choiceArray = [];
+  choiceIndexArray = [];
+  countCorrect += 1;
+  firstChoice = null;
+};
+
+function finished(){
+  playerObject = updatePlayerInfo(countTotal);
+  pullPushHighScoreArray(playerObject);
+  alert('Congratulations! You solved the game in ' + countTotal + ' clicks!');
+  window.location = 'about-info.html';
+};
+
+function choiceNotMatching(event, faceDown) {
+  selecting = true;
+  setTimeout(function(){flipCards(event, faceDown);}, 1000);
+  choiceArray = [];
+  choiceIndexArray = [];
+};
+
+function pullPushHighScoreArray(object) {
+  var jsonArray;
+  var updatedArray;
+  var newArray;
+  if (localStorage.getItem('high_score_array')) {
+    jsonArray = JSON.parse(localStorage.getItem('high_score_array'));
+    jsonArray.push(object);
+    updatedArray = JSON.stringify(jsonArray);
+    localStorage.setItem('high_score_array', updatedArray);
+  } else {
+    newArray = JSON.stringify([object]);
+    localStorage.setItem('high_score_array', newArray);
+  };
+};
+
+function updatePlayerInfo(countTotal) {
+  var playerObject;
+  var returnPlayer;
+  playerObject = JSON.parse(localStorage.getItem('current_player'));
+  playerObject.score = countTotal;
+  returnPlayer = JSON.stringify(playerObject);
+  localStorage.setItem('current_player', returnPlayer);
+  return playerObject;
+};
+
+function buildTable(imageArray){
   var iA = 0;
   var table = document.getElementById('game_table');
   var tRow;
@@ -161,69 +220,12 @@ function clickHandler(event){
   };
 };
 
-//function to flip cards and allow for setTimout
-function flipCards(event, faceDown) {
-  selecting = false;
-  event.target.setAttribute('src', faceDown);
-  event.target.setAttribute('class', 'flipback');
-  firstChoice.setAttribute('src', faceDown);
-  firstChoice.setAttribute('class', 'flipback');
-  firstChoice = null;
-  event.target.disable = false;
-};
-
-function pushCctPairs() {
-  correctPairs.push(choiceArray[0]);
-  choiceArray = [];
-  choiceIndexArray = [];
-  countCorrect += 1;
-  firstChoice = null;
-};
-
-function finished(){
-  playerObject = updatePlayerInfo(countTotal);
-  pullPushHighScoreArray(playerObject);
-  alert('Congratulations! You solved the game in ' + countTotal + ' clicks!');
-  window.location = 'about-info.html';
-};
-
-function choiceNotMatching(event, faceDown) {
-  selecting = true;
-  setTimeout(function(){flipCards(event, faceDown);}, 1000);
-  choiceArray = [];
-  choiceIndexArray = [];
-};
-
-function pullPushHighScoreArray(object) {
-  var jsonArray;
-  var updatedArray;
-  var newArray;
-  if (localStorage.getItem('high_score_array')) {
-    jsonArray = JSON.parse(localStorage.getItem('high_score_array'));
-    jsonArray.push(object);
-    updatedArray = JSON.stringify(jsonArray);
-    localStorage.setItem('high_score_array', updatedArray);
-  } else {
-    newArray = JSON.stringify([object]);
-    localStorage.setItem('high_score_array', newArray);
-  };
-};
-
-function updatePlayerInfo(countTotal) {
-  var playerObject;
-  var returnPlayer;
-  playerObject = JSON.parse(localStorage.getItem('current_player'));
-  playerObject.score = countTotal;
-  returnPlayer = JSON.stringify(playerObject);
-  localStorage.setItem('current_player', returnPlayer);
-  return playerObject;
-};
-
 //main
 
 getGameParam();
 shuffledArray = shuffleArray(cardDictionary[key1]);
 grabItems(shuffledArray, level1);
 imageArray = shuffleArray(imageArray);
-buildTable();
+buildTable(imageArray);
+picSelector = document.getElementById('game_table');
 picSelector.addEventListener('click', clickHandler);
